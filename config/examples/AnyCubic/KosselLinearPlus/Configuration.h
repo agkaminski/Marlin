@@ -90,8 +90,6 @@
 // build by the user have been successfully uploaded into firmware.
 #define STRING_CONFIG_H_AUTHOR "ArtieH, V2.0 5-22-19" // Who made the changes.
 #define SHOW_BOOTSCREEN
-#define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
-#define STRING_SPLASH_LINE2 "Welcome to ANYCUBIC"         // will be shown during bootup in line 2
 
 /**
  * *** VENDORS PLEASE READ ***
@@ -139,7 +137,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 115200
+#define BAUDRATE 250000
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -313,34 +311,6 @@
 //#define HOTEND_OFFSET_Y {0.0, 5.00}  // (mm) relative Y-offset for each nozzle
 //#define HOTEND_OFFSET_Z {0.0, 0.00}  // (mm) relative Z-offset for each nozzle
 
-// @section machine
-
-/**
- * Select your power supply here. Use 0 if you haven't connected the PS_ON_PIN
- *
- * 0 = No Power Switch
- * 1 = ATX
- * 2 = X-Box 360 203Watts (the blue wire connected to PS_ON and the red wire to VCC)
- *
- * :{ 0:'No power switch', 1:'ATX', 2:'X-Box 360' }
- */
-#define POWER_SUPPLY 0
-
-#if POWER_SUPPLY > 0
-  // Enable this option to leave the PSU off at startup.
-  // Power to steppers and heaters will need to be turned on with M80.
-  //#define PS_DEFAULT_OFF
-
-  //#define AUTO_POWER_CONTROL        // Enable automatic control of the PS_ON pin
-  #if ENABLED(AUTO_POWER_CONTROL)
-    #define AUTO_POWER_FANS           // Turn on PSU if fans need power
-    #define AUTO_POWER_E_FANS
-    #define AUTO_POWER_CONTROLLERFAN
-    #define AUTO_POWER_CHAMBER_FAN
-    #define POWER_TIMEOUT 30
-  #endif
-
-#endif
 
 // @section temperature
 
@@ -763,9 +733,9 @@
  *          TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-//#define X_DRIVER_TYPE  A4988
-//#define Y_DRIVER_TYPE  A4988
-//#define Z_DRIVER_TYPE  A4988
+#define X_DRIVER_TYPE  TMC2208_STANDALONE
+#define Y_DRIVER_TYPE  TMC2208_STANDALONE
+#define Z_DRIVER_TYPE  TMC2208_STANDALONE
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
 //#define Z2_DRIVER_TYPE A4988
@@ -1058,9 +1028,9 @@
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 0     // Y offset: -front +behind [the nozzle]
 
 #if ANYCUBIC_PROBE_VERSION == 2
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -15.7  // Z offset: -below +above  [the nozzle]
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -15.9  // Z offset: -below +above  [the nozzle]
 #elif ANYCUBIC_PROBE_VERSION == 1
-  #define Z_PROBE_OFFSET_FROM_EXTRUDER -19.0  // Z offset: -below +above  [the nozzle]
+  #define Z_PROBE_OFFSET_FROM_EXTRUDER -15.9  // Z offset: -below +above  [the nozzle]
 #else
   #define Z_PROBE_OFFSET_FROM_EXTRUDER   0    // Z offset: -below +above  [the nozzle]
 #endif
@@ -1154,9 +1124,9 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR true
-#define INVERT_Y_DIR true
-#define INVERT_Z_DIR true
+#define INVERT_X_DIR false
+#define INVERT_Y_DIR false
+#define INVERT_Z_DIR false
 
 // @section extruder
 
@@ -1593,7 +1563,7 @@
 
 // Preheat Constants
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 190
+#define PREHEAT_1_TEMP_HOTEND 200
 #define PREHEAT_1_TEMP_BED     60
 #define PREHEAT_1_FAN_SPEED   255 // Value from 0 to 255
 
@@ -1860,8 +1830,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-#define LCD_FEEDBACK_FREQUENCY_HZ 5000
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 20
+#define LCD_FEEDBACK_FREQUENCY_HZ 2000
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
